@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5k41j47ojlku"]
+
+[ext_resource type="Script" path="res://zombie_survival/mushroom/mushroom.gd" id="1_ewhus"]
+[ext_resource type="Texture2D" uid="uid://bajlh6l7uabku" path="res://zombie_survival/assets/PropsPixelArt/MushroomRed.png" id="2_235e5"]
+
+[node name="Mushroom" type="Node2D"]
+script = ExtResource("1_ewhus")
+
+[node name="MushroomSprite" type="Sprite2D" parent="."]
+position = Vector2(2, -10)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("2_235e5")

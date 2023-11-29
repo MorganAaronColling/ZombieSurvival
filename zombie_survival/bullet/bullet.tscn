@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://pgsvjhjalgdd"]
+
+[ext_resource type="Script" path="res://zombie_survival/bullet/bullet.gd" id="1_ktbvy"]
+[ext_resource type="Texture2D" uid="uid://7qs3qoilbyeo" path="res://zombie_survival/assets/Player/Bullet.png" id="1_sxta7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4k2ut"]
+atlas = ExtResource("1_sxta7")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl1fd"]
+atlas = ExtResource("1_sxta7")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v6kf"]
+atlas = ExtResource("1_sxta7")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7g5x"]
+atlas = ExtResource("1_sxta7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_efoph"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4k2ut")
+}],
+"loop": true,
+"name": &"default_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl1fd")
+}],
+"loop": true,
+"name": &"default_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v6kf")
+}],
+"loop": true,
+"name": &"default_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7g5x")
+}],
+"loop": true,
+"name": &"default_up",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_62nec"]
+radius = 4.0
+
+[node name="Bullet" type="Area2D"]
+monitorable = false
+script = ExtResource("1_ktbvy")
+
+[node name="BulletAnimated" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_efoph")
+animation = &"default_up"
+
+[node name="BulletDamageArea" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_62nec")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

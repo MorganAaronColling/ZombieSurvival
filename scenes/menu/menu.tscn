@@ -32,7 +32,7 @@ offset_bottom = -339.0
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4")
 theme_override_font_sizes/font_size = 60
-text = "Godot Game Template"
+text = "Zombie Survival"
 uppercase = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

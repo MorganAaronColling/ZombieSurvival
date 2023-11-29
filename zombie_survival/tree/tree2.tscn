@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://80t432bauhmy"]
+
+[ext_resource type="Script" path="res://zombie_survival/tree/tree.gd" id="1_kv6x7"]
+[ext_resource type="Texture2D" uid="uid://busv4n205scn4" path="res://zombie_survival/assets/PropsPixelArt/Tree.png" id="2_jjnxr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_idgas"]
+radius = 8.0
+height = 20.0
+
+[node name="Tree" type="StaticBody2D"]
+script = ExtResource("1_kv6x7")
+
+[node name="TreeSprite" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-07, -65)
+scale = Vector2(0.09, 0.09)
+texture = ExtResource("2_jjnxr")
+offset = Vector2(-20, 0)
+
+[node name="TreeCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_idgas")

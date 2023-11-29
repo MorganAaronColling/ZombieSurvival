@@ -1,14 +1,4497 @@
-[gd_scene load_steps=4 format=3 uid="uid://4fyoq8npekf0"]
+[gd_scene load_steps=15 format=3 uid="uid://4fyoq8npekf0"]
 
-[ext_resource type="Texture2D" uid="uid://dtwpm3uclaspj" path="res://assets/sprites/icon.png" id="1"]
 [ext_resource type="PackedScene" uid="uid://barl4q1kugrmm" path="res://scenes/gameplay/pause-layer/pause-layer.tscn" id="2"]
+[ext_resource type="AudioStream" uid="uid://btidjmmyxlynw" path="res://zombie_survival/assets/Sounds/BackgroundForest.wav" id="3_dy3bx"]
+[ext_resource type="PackedScene" uid="uid://w6atmhgrhc5s" path="res://zombie_survival/player/player.tscn" id="3_enwbk"]
+[ext_resource type="AudioStream" uid="uid://bydl28sxcdraq" path="res://zombie_survival/assets/Sounds/BackgroundMusicForest.mp3" id="4_4orwv"]
+[ext_resource type="PackedScene" uid="uid://bltheokwiwvh2" path="res://zombie_survival/zombie/zombie.tscn" id="4_j4fgv"]
 [ext_resource type="Script" path="res://scenes/gameplay/gameplay.gd" id="5"]
+[ext_resource type="PackedScene" uid="uid://o4fyafpcmttd" path="res://zombie_survival/tree/tree.tscn" id="5_8ljpg"]
+[ext_resource type="PackedScene" uid="uid://b5k41j47ojlku" path="res://zombie_survival/mushroom/mushroom.tscn" id="5_wihky"]
+[ext_resource type="PackedScene" uid="uid://80t432bauhmy" path="res://zombie_survival/tree/tree2.tscn" id="7_8d4s2"]
+[ext_resource type="PackedScene" uid="uid://bqx3uw83hve2c" path="res://zombie_survival/grass/grass.tscn" id="7_nlokt"]
+[ext_resource type="PackedScene" uid="uid://cf046nodxl2b0" path="res://zombie_survival/mushroom/mushroom2.tscn" id="8_s8ql3"]
+[ext_resource type="PackedScene" uid="uid://dy8w2pk8n4hvb" path="res://zombie_survival/rock/rock.tscn" id="10_fq4va"]
+
+[sub_resource type="Environment" id="Environment_0e2kn"]
+background_mode = 3
+tonemap_exposure = 1.2
+glow_strength = 0.2
+glow_bloom = 0.1
+glow_blend_mode = 0
+adjustment_enabled = true
+adjustment_brightness = 0.86
+adjustment_contrast = 1.1
+adjustment_saturation = 0.7
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6565c"]
+vertices = PackedVector2Array(-52, -39, 1220, -33, 1226, 693, -46, 691)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-52, -39, 1220, -33, 1226, 693, -46, 691)])
 
 [node name="Gameplay" type="Node"]
 script = ExtResource("5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(523.993, 298.508)
-texture = ExtResource("1")
-
 [node name="PauseLayer" parent="." instance=ExtResource("2")]
+visible = false
+
+[node name="BackgroundAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_dy3bx")
+volume_db = -5.0
+autoplay = true
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_4orwv")
+volume_db = -5.0
+autoplay = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0e2kn")
+
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="World"]
+visible = false
+position = Vector2(1, 12)
+navigation_polygon = SubResource("NavigationPolygon_6565c")
+
+[node name="Player" parent="World" instance=ExtResource("3_enwbk")]
+position = Vector2(573, 388)
+scale = Vector2(2, 2)
+
+[node name="PlayerCamera" type="Camera2D" parent="World/Player"]
+zoom = Vector2(2, 2)
+
+[node name="Zombie" parent="World" instance=ExtResource("4_j4fgv")]
+position = Vector2(337, 304)
+scale = Vector2(2, 2)
+
+[node name="Zombie2" parent="World" instance=ExtResource("4_j4fgv")]
+position = Vector2(595, 51)
+scale = Vector2(2, 2)
+
+[node name="Zombie3" parent="World" instance=ExtResource("4_j4fgv")]
+position = Vector2(805, 406)
+scale = Vector2(2, 2)
+
+[node name="Zombie4" parent="World" instance=ExtResource("4_j4fgv")]
+position = Vector2(1145, 261)
+scale = Vector2(2, 2)
+
+[node name="Zombie5" parent="World" instance=ExtResource("4_j4fgv")]
+position = Vector2(-5, 292)
+scale = Vector2(2, 2)
+
+[node name="Zombie6" parent="World" instance=ExtResource("4_j4fgv")]
+position = Vector2(194, 112)
+scale = Vector2(2, 2)
+
+[node name="Zombie7" parent="World" instance=ExtResource("4_j4fgv")]
+position = Vector2(-136, 382)
+scale = Vector2(2, 2)
+
+[node name="Zombie8" parent="World" instance=ExtResource("4_j4fgv")]
+position = Vector2(266, 75)
+scale = Vector2(2, 2)
+
+[node name="Tree" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(62, 160)
+
+[node name="Tree7" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(715, 539)
+
+[node name="Tree8" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(860, 482)
+
+[node name="Tree9" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(954, 260)
+
+[node name="Tree10" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(843, 136)
+
+[node name="Tree11" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(232, 226)
+
+[node name="Tree2" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(214, 516)
+
+[node name="Tree3" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(808, 321)
+
+[node name="Tree4" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(500, 356)
+
+[node name="Tree5" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(629, 233)
+
+[node name="Tree6" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(442, 157)
+
+[node name="Mushroom" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(162, 310)
+
+[node name="Mushroom2" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(271, 514)
+
+[node name="Mushroom3" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(615, 556)
+
+[node name="Mushroom4" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(403, 178)
+
+[node name="Mushroom5" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(709, 188)
+
+[node name="Mushroom6" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(901, 392)
+
+[node name="Grass" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(258, 384)
+
+[node name="Grass2" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(215, 367)
+
+[node name="Grass3" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(225, 388)
+
+[node name="Grass4" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(252, 405)
+
+[node name="Grass5" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(259, 362)
+
+[node name="Grass6" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(288, 372)
+
+[node name="Grass7" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(297, 391)
+
+[node name="Grass8" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(313, 415)
+
+[node name="Grass9" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(290, 409)
+
+[node name="Grass10" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(262, 423)
+
+[node name="Grass11" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(547, 501)
+
+[node name="Grass12" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(504, 484)
+
+[node name="Grass13" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(514, 505)
+
+[node name="Grass14" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(541, 522)
+
+[node name="Grass15" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(548, 479)
+
+[node name="Grass16" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(577, 489)
+
+[node name="Grass17" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(586, 508)
+
+[node name="Grass18" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(602, 532)
+
+[node name="Grass19" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(579, 526)
+
+[node name="Grass20" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(551, 540)
+
+[node name="Grass21" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(623, 349)
+
+[node name="Grass22" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(580, 332)
+
+[node name="Grass23" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(590, 353)
+
+[node name="Grass24" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(617, 370)
+
+[node name="Grass25" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(624, 327)
+
+[node name="Grass26" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(653, 337)
+
+[node name="Grass27" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(662, 356)
+
+[node name="Grass28" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(678, 380)
+
+[node name="Grass29" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(655, 374)
+
+[node name="Grass30" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(627, 388)
+
+[node name="Grass31" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(209, 515)
+
+[node name="Grass32" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(166, 498)
+
+[node name="Grass33" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(176, 519)
+
+[node name="Grass34" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(203, 536)
+
+[node name="Grass35" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(210, 493)
+
+[node name="Grass36" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(239, 503)
+
+[node name="Grass37" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(248, 522)
+
+[node name="Grass38" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(264, 546)
+
+[node name="Grass39" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(241, 540)
+
+[node name="Grass40" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(213, 554)
+
+[node name="Grass41" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(386, 285)
+
+[node name="Grass42" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(343, 268)
+
+[node name="Grass43" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(353, 289)
+
+[node name="Grass44" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(380, 306)
+
+[node name="Grass45" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(387, 263)
+
+[node name="Grass46" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(416, 273)
+
+[node name="Grass47" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(425, 292)
+
+[node name="Grass48" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(441, 316)
+
+[node name="Grass49" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(418, 310)
+
+[node name="Grass50" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(390, 324)
+
+[node name="Grass51" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(115, 248)
+
+[node name="Grass52" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(72, 231)
+
+[node name="Grass53" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(82, 252)
+
+[node name="Grass54" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(109, 269)
+
+[node name="Grass55" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(116, 226)
+
+[node name="Grass56" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(145, 236)
+
+[node name="Grass57" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(154, 255)
+
+[node name="Grass58" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(170, 279)
+
+[node name="Grass59" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(147, 273)
+
+[node name="Grass60" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(119, 287)
+
+[node name="Grass61" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(700, 74)
+
+[node name="Grass62" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(657, 57)
+
+[node name="Grass63" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(667, 78)
+
+[node name="Grass64" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(694, 95)
+
+[node name="Grass65" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(701, 52)
+
+[node name="Grass66" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(730, 62)
+
+[node name="Grass67" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(739, 81)
+
+[node name="Grass68" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(755, 105)
+
+[node name="Grass69" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(732, 99)
+
+[node name="Grass70" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(704, 113)
+
+[node name="Grass71" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1005, 306)
+
+[node name="Grass72" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(962, 289)
+
+[node name="Grass73" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(972, 310)
+
+[node name="Grass74" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(999, 327)
+
+[node name="Grass75" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1006, 284)
+
+[node name="Grass76" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1035, 294)
+
+[node name="Grass77" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1044, 313)
+
+[node name="Grass78" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1060, 337)
+
+[node name="Grass79" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1037, 331)
+
+[node name="Grass80" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1009, 345)
+
+[node name="Grass81" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1000, 515)
+
+[node name="Grass82" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(957, 498)
+
+[node name="Grass83" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(967, 519)
+
+[node name="Grass84" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(994, 536)
+
+[node name="Grass85" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1001, 493)
+
+[node name="Grass86" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1030, 503)
+
+[node name="Grass87" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1039, 522)
+
+[node name="Grass88" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1055, 546)
+
+[node name="Grass89" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1032, 540)
+
+[node name="Grass90" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1004, 554)
+
+[node name="Grass91" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(801, 596)
+
+[node name="Grass92" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(758, 579)
+
+[node name="Grass93" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(768, 600)
+
+[node name="Grass94" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(795, 617)
+
+[node name="Grass95" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(802, 574)
+
+[node name="Grass96" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(831, 584)
+
+[node name="Grass97" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(840, 603)
+
+[node name="Grass98" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(856, 627)
+
+[node name="Grass99" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(833, 621)
+
+[node name="Grass100" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(805, 635)
+
+[node name="Grass101" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(166, 110)
+
+[node name="Grass102" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(123, 93)
+
+[node name="Grass103" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(133, 114)
+
+[node name="Grass104" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(160, 131)
+
+[node name="Grass105" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(167, 88)
+
+[node name="Grass106" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(196, 98)
+
+[node name="Grass107" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(205, 117)
+
+[node name="Grass108" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(221, 141)
+
+[node name="Grass109" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(198, 135)
+
+[node name="Grass110" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(170, 149)
+
+[node name="Grass111" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(45, 581)
+
+[node name="Grass112" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2, 564)
+
+[node name="Grass113" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(12, 585)
+
+[node name="Grass114" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(39, 602)
+
+[node name="Grass115" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(46, 559)
+
+[node name="Grass116" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(75, 569)
+
+[node name="Grass117" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(84, 588)
+
+[node name="Grass118" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(100, 612)
+
+[node name="Grass119" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(77, 606)
+
+[node name="Grass120" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(49, 620)
+
+[node name="Mushroom7" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(140, 587)
+
+[node name="Mushroom8" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(769, 380)
+
+[node name="Mushroom9" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(310, 198)
+
+[node name="Mushroom10" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(31, 202)
+
+[node name="Mushroom11" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(911, 612)
+
+[node name="Mushroom12" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1111, 398)
+
+[node name="Mushroom13" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1031, 190)
+
+[node name="Mushroom14" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(530, 74)
+
+[node name="Tree12" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(476, 595)
+
+[node name="Tree13" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(76, 437)
+
+[node name="Tree14" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(322, 71)
+
+[node name="Tree15" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(996, 565)
+
+[node name="Tree16" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(701, 380)
+
+[node name="Tree17" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1096, 203)
+
+[node name="Tree18" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(320, 373)
+
+[node name="Rock" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(267, 607)
+
+[node name="Rock2" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(331, 169)
+
+[node name="Rock3" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(493, 197)
+
+[node name="Rock4" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(941, 98)
+
+[node name="Rock5" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1019, 99)
+
+[node name="Rock6" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(991, 59)
+
+[node name="Rock7" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(789, 443)
+
+[node name="Rock8" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(988, 623)
+
+[node name="Rock9" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(378, 445)
+
+[node name="Rock10" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(146, 190)
+
+[node name="Rock11" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(125, 52)
+
+[node name="Tree19" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(22, -431)
+
+[node name="Tree20" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(675, -52)
+
+[node name="Tree21" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(820, -109)
+
+[node name="Tree22" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(914, -331)
+
+[node name="Tree23" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(803, -455)
+
+[node name="Tree24" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(192, -365)
+
+[node name="Tree25" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(174, -75)
+
+[node name="Tree26" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(768, -270)
+
+[node name="Tree27" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(460, -235)
+
+[node name="Tree28" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(589, -358)
+
+[node name="Tree29" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(402, -434)
+
+[node name="Mushroom15" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(122, -281)
+
+[node name="Mushroom16" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(231, -77)
+
+[node name="Mushroom17" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(575, -35)
+
+[node name="Mushroom18" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(363, -413)
+
+[node name="Mushroom19" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(669, -403)
+
+[node name="Mushroom20" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(861, -199)
+
+[node name="Grass121" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(218, -207)
+
+[node name="Grass122" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(175, -224)
+
+[node name="Grass123" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(185, -203)
+
+[node name="Grass124" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(212, -186)
+
+[node name="Grass125" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(219, -229)
+
+[node name="Grass126" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(248, -219)
+
+[node name="Grass127" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(257, -200)
+
+[node name="Grass128" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(273, -176)
+
+[node name="Grass129" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(250, -182)
+
+[node name="Grass130" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(222, -168)
+
+[node name="Grass131" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(507, -90)
+
+[node name="Grass132" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(464, -107)
+
+[node name="Grass133" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(474, -86)
+
+[node name="Grass134" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(501, -69)
+
+[node name="Grass135" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(508, -112)
+
+[node name="Grass136" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(537, -102)
+
+[node name="Grass137" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(546, -83)
+
+[node name="Grass138" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(562, -59)
+
+[node name="Grass139" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(539, -65)
+
+[node name="Grass140" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(511, -51)
+
+[node name="Grass141" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(583, -242)
+
+[node name="Grass142" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(540, -259)
+
+[node name="Grass143" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(550, -238)
+
+[node name="Grass144" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(577, -221)
+
+[node name="Grass145" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(584, -264)
+
+[node name="Grass146" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(613, -254)
+
+[node name="Grass147" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(622, -235)
+
+[node name="Grass148" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(638, -211)
+
+[node name="Grass149" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(615, -217)
+
+[node name="Grass150" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(587, -203)
+
+[node name="Grass151" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(169, -76)
+
+[node name="Grass152" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(126, -93)
+
+[node name="Grass153" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(136, -72)
+
+[node name="Grass154" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(163, -55)
+
+[node name="Grass155" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(170, -98)
+
+[node name="Grass156" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(199, -88)
+
+[node name="Grass157" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(208, -69)
+
+[node name="Grass158" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(224, -45)
+
+[node name="Grass159" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(201, -51)
+
+[node name="Grass160" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(173, -37)
+
+[node name="Grass161" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(346, -306)
+
+[node name="Grass162" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(303, -323)
+
+[node name="Grass163" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(313, -302)
+
+[node name="Grass164" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(340, -285)
+
+[node name="Grass165" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(347, -328)
+
+[node name="Grass166" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(376, -318)
+
+[node name="Grass167" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(385, -299)
+
+[node name="Grass168" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(401, -275)
+
+[node name="Grass169" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(378, -281)
+
+[node name="Grass170" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(350, -267)
+
+[node name="Grass171" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(75, -343)
+
+[node name="Grass172" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(32, -360)
+
+[node name="Grass173" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(42, -339)
+
+[node name="Grass174" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(69, -322)
+
+[node name="Grass175" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(76, -365)
+
+[node name="Grass176" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(105, -355)
+
+[node name="Grass177" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(114, -336)
+
+[node name="Grass178" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(130, -312)
+
+[node name="Grass179" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(107, -318)
+
+[node name="Grass180" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(79, -304)
+
+[node name="Grass181" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(660, -517)
+
+[node name="Grass182" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(617, -534)
+
+[node name="Grass183" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(627, -513)
+
+[node name="Grass184" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(654, -496)
+
+[node name="Grass185" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(661, -539)
+
+[node name="Grass186" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(690, -529)
+
+[node name="Grass187" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(699, -510)
+
+[node name="Grass188" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(715, -486)
+
+[node name="Grass189" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(692, -492)
+
+[node name="Grass190" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(664, -478)
+
+[node name="Grass191" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(965, -285)
+
+[node name="Grass192" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(922, -302)
+
+[node name="Grass193" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(932, -281)
+
+[node name="Grass194" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(959, -264)
+
+[node name="Grass195" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(966, -307)
+
+[node name="Grass196" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(995, -297)
+
+[node name="Grass197" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1004, -278)
+
+[node name="Grass198" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1020, -254)
+
+[node name="Grass199" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(997, -260)
+
+[node name="Grass200" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(969, -246)
+
+[node name="Grass201" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(960, -76)
+
+[node name="Grass202" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(917, -93)
+
+[node name="Grass203" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(927, -72)
+
+[node name="Grass204" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(954, -55)
+
+[node name="Grass205" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(961, -98)
+
+[node name="Grass206" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(990, -88)
+
+[node name="Grass207" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(999, -69)
+
+[node name="Grass208" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1015, -45)
+
+[node name="Grass209" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(992, -51)
+
+[node name="Grass210" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(964, -37)
+
+[node name="Grass211" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(761, 5)
+
+[node name="Grass212" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(718, -12)
+
+[node name="Grass213" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(728, 9)
+
+[node name="Grass214" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(755, 26)
+
+[node name="Grass215" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(762, -17)
+
+[node name="Grass216" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(791, -7)
+
+[node name="Grass217" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(800, 12)
+
+[node name="Grass218" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(816, 36)
+
+[node name="Grass219" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(793, 30)
+
+[node name="Grass220" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(765, 44)
+
+[node name="Grass221" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(126, -481)
+
+[node name="Grass222" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(83, -498)
+
+[node name="Grass223" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(93, -477)
+
+[node name="Grass224" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(120, -460)
+
+[node name="Grass225" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(127, -503)
+
+[node name="Grass226" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(156, -493)
+
+[node name="Grass227" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(165, -474)
+
+[node name="Grass228" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(181, -450)
+
+[node name="Grass229" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(158, -456)
+
+[node name="Grass230" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(130, -442)
+
+[node name="Grass231" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(5, -10)
+
+[node name="Grass232" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-38, -27)
+
+[node name="Grass233" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-28, -6)
+
+[node name="Grass234" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1, 11)
+
+[node name="Grass235" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(6, -32)
+
+[node name="Grass236" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(35, -22)
+
+[node name="Grass237" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(44, -3)
+
+[node name="Grass238" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(60, 21)
+
+[node name="Grass239" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(37, 15)
+
+[node name="Grass240" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(9, 29)
+
+[node name="Mushroom21" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(100, -4)
+
+[node name="Mushroom22" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(729, -211)
+
+[node name="Mushroom23" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(270, -393)
+
+[node name="Mushroom24" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-9, -389)
+
+[node name="Mushroom25" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(871, 21)
+
+[node name="Mushroom26" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1071, -193)
+
+[node name="Mushroom27" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(991, -401)
+
+[node name="Mushroom28" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(490, -517)
+
+[node name="Tree30" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(436, 4)
+
+[node name="Tree31" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(36, -154)
+
+[node name="Tree32" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(282, -520)
+
+[node name="Tree33" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(956, -26)
+
+[node name="Tree34" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(661, -211)
+
+[node name="Tree35" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1056, -388)
+
+[node name="Tree36" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(280, -218)
+
+[node name="Rock12" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(227, 16)
+
+[node name="Rock13" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(291, -422)
+
+[node name="Rock14" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(453, -394)
+
+[node name="Rock15" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(901, -493)
+
+[node name="Rock16" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(979, -492)
+
+[node name="Rock17" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(951, -532)
+
+[node name="Rock18" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(749, -148)
+
+[node name="Rock19" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(948, 32)
+
+[node name="Rock20" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(338, -146)
+
+[node name="Rock21" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(106, -401)
+
+[node name="Rock22" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(85, -539)
+
+[node name="Tree37" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-1037, -417)
+
+[node name="Tree38" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-384, -38)
+
+[node name="Tree39" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-239, -95)
+
+[node name="Tree40" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-145, -317)
+
+[node name="Tree41" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-256, -441)
+
+[node name="Tree42" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-867, -351)
+
+[node name="Tree43" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-885, -61)
+
+[node name="Tree44" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-291, -256)
+
+[node name="Tree45" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-599, -221)
+
+[node name="Tree46" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-470, -344)
+
+[node name="Tree47" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-657, -420)
+
+[node name="Mushroom29" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-937, -267)
+
+[node name="Mushroom30" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-828, -63)
+
+[node name="Mushroom31" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-484, -21)
+
+[node name="Mushroom32" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-696, -399)
+
+[node name="Mushroom33" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-390, -389)
+
+[node name="Mushroom34" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-198, -185)
+
+[node name="Grass241" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-841, -193)
+
+[node name="Grass242" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-884, -210)
+
+[node name="Grass243" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-874, -189)
+
+[node name="Grass244" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-847, -172)
+
+[node name="Grass245" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-840, -215)
+
+[node name="Grass246" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-811, -205)
+
+[node name="Grass247" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-802, -186)
+
+[node name="Grass248" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-786, -162)
+
+[node name="Grass249" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-809, -168)
+
+[node name="Grass250" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-837, -154)
+
+[node name="Grass251" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-552, -76)
+
+[node name="Grass252" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-595, -93)
+
+[node name="Grass253" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-585, -72)
+
+[node name="Grass254" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-558, -55)
+
+[node name="Grass255" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-551, -98)
+
+[node name="Grass256" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-522, -88)
+
+[node name="Grass257" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-513, -69)
+
+[node name="Grass258" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-497, -45)
+
+[node name="Grass259" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-520, -51)
+
+[node name="Grass260" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-548, -37)
+
+[node name="Grass261" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-476, -228)
+
+[node name="Grass262" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-519, -245)
+
+[node name="Grass263" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-509, -224)
+
+[node name="Grass264" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-482, -207)
+
+[node name="Grass265" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-475, -250)
+
+[node name="Grass266" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-446, -240)
+
+[node name="Grass267" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-437, -221)
+
+[node name="Grass268" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-421, -197)
+
+[node name="Grass269" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-444, -203)
+
+[node name="Grass270" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-472, -189)
+
+[node name="Grass271" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-890, -62)
+
+[node name="Grass272" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-933, -79)
+
+[node name="Grass273" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-923, -58)
+
+[node name="Grass274" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-896, -41)
+
+[node name="Grass275" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-889, -84)
+
+[node name="Grass276" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-860, -74)
+
+[node name="Grass277" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-851, -55)
+
+[node name="Grass278" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-835, -31)
+
+[node name="Grass279" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-858, -37)
+
+[node name="Grass280" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-886, -23)
+
+[node name="Grass281" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-713, -292)
+
+[node name="Grass282" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-756, -309)
+
+[node name="Grass283" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-746, -288)
+
+[node name="Grass284" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-719, -271)
+
+[node name="Grass285" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-712, -314)
+
+[node name="Grass286" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-683, -304)
+
+[node name="Grass287" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-674, -285)
+
+[node name="Grass288" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-658, -261)
+
+[node name="Grass289" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-681, -267)
+
+[node name="Grass290" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-709, -253)
+
+[node name="Grass291" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-984, -329)
+
+[node name="Grass292" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1027, -346)
+
+[node name="Grass293" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1017, -325)
+
+[node name="Grass294" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-990, -308)
+
+[node name="Grass295" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-983, -351)
+
+[node name="Grass296" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-954, -341)
+
+[node name="Grass297" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-945, -322)
+
+[node name="Grass298" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-929, -298)
+
+[node name="Grass299" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-952, -304)
+
+[node name="Grass300" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-980, -290)
+
+[node name="Grass301" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-399, -503)
+
+[node name="Grass302" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-442, -520)
+
+[node name="Grass303" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-432, -499)
+
+[node name="Grass304" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-405, -482)
+
+[node name="Grass305" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-398, -525)
+
+[node name="Grass306" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-369, -515)
+
+[node name="Grass307" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-360, -496)
+
+[node name="Grass308" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-344, -472)
+
+[node name="Grass309" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-367, -478)
+
+[node name="Grass310" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-395, -464)
+
+[node name="Grass311" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-94, -271)
+
+[node name="Grass312" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-137, -288)
+
+[node name="Grass313" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-127, -267)
+
+[node name="Grass314" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-100, -250)
+
+[node name="Grass315" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-93, -293)
+
+[node name="Grass316" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-64, -283)
+
+[node name="Grass317" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-55, -264)
+
+[node name="Grass318" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-39, -240)
+
+[node name="Grass319" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-62, -246)
+
+[node name="Grass320" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-90, -232)
+
+[node name="Grass321" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-99, -62)
+
+[node name="Grass322" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-142, -79)
+
+[node name="Grass323" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-132, -58)
+
+[node name="Grass324" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-105, -41)
+
+[node name="Grass325" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-98, -84)
+
+[node name="Grass326" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-69, -74)
+
+[node name="Grass327" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-60, -55)
+
+[node name="Grass328" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-44, -31)
+
+[node name="Grass329" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-67, -37)
+
+[node name="Grass330" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-95, -23)
+
+[node name="Grass331" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-298, 19)
+
+[node name="Grass332" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-341, 2)
+
+[node name="Grass333" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-331, 23)
+
+[node name="Grass334" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-304, 40)
+
+[node name="Grass335" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-297, -3)
+
+[node name="Grass336" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-268, 7)
+
+[node name="Grass337" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-259, 26)
+
+[node name="Grass338" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-243, 50)
+
+[node name="Grass339" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-266, 44)
+
+[node name="Grass340" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-294, 58)
+
+[node name="Grass341" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-933, -467)
+
+[node name="Grass342" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-976, -484)
+
+[node name="Grass343" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-966, -463)
+
+[node name="Grass344" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-939, -446)
+
+[node name="Grass345" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-932, -489)
+
+[node name="Grass346" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-903, -479)
+
+[node name="Grass347" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-894, -460)
+
+[node name="Grass348" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-878, -436)
+
+[node name="Grass349" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-901, -442)
+
+[node name="Grass350" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-929, -428)
+
+[node name="Grass351" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1054, 4)
+
+[node name="Grass352" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1097, -13)
+
+[node name="Grass353" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1087, 8)
+
+[node name="Grass354" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1060, 25)
+
+[node name="Grass355" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1053, -18)
+
+[node name="Grass356" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1024, -8)
+
+[node name="Grass357" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1015, 11)
+
+[node name="Grass358" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-999, 35)
+
+[node name="Grass359" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1022, 29)
+
+[node name="Grass360" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1050, 43)
+
+[node name="Mushroom35" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-959, 10)
+
+[node name="Mushroom36" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-330, -197)
+
+[node name="Mushroom37" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-789, -379)
+
+[node name="Mushroom38" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-1068, -375)
+
+[node name="Mushroom39" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-188, 35)
+
+[node name="Mushroom40" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(12, -179)
+
+[node name="Mushroom41" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-68, -387)
+
+[node name="Mushroom42" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-569, -503)
+
+[node name="Tree48" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-623, 18)
+
+[node name="Tree49" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-1023, -140)
+
+[node name="Tree50" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-777, -506)
+
+[node name="Tree51" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-103, -12)
+
+[node name="Tree52" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-398, -197)
+
+[node name="Tree53" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-3, -374)
+
+[node name="Tree54" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-779, -204)
+
+[node name="Rock23" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-832, 30)
+
+[node name="Rock24" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-768, -408)
+
+[node name="Rock25" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-606, -380)
+
+[node name="Rock26" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-158, -479)
+
+[node name="Rock27" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-80, -478)
+
+[node name="Rock28" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-108, -518)
+
+[node name="Rock29" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-310, -134)
+
+[node name="Rock30" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-111, 46)
+
+[node name="Rock31" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-721, -132)
+
+[node name="Rock32" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-953, -387)
+
+[node name="Rock33" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-974, -525)
+
+[node name="Tree55" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-1005, 147)
+
+[node name="Tree56" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-352, 526)
+
+[node name="Tree57" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-207, 469)
+
+[node name="Tree58" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-113, 247)
+
+[node name="Tree59" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-224, 123)
+
+[node name="Tree60" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-835, 213)
+
+[node name="Tree61" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-853, 503)
+
+[node name="Tree62" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-259, 308)
+
+[node name="Tree63" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-567, 343)
+
+[node name="Tree64" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-438, 220)
+
+[node name="Tree65" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-625, 144)
+
+[node name="Mushroom43" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-905, 297)
+
+[node name="Mushroom44" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-796, 501)
+
+[node name="Mushroom45" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-452, 543)
+
+[node name="Mushroom46" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-664, 165)
+
+[node name="Mushroom47" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-358, 175)
+
+[node name="Mushroom48" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-166, 379)
+
+[node name="Grass361" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-809, 371)
+
+[node name="Grass362" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-852, 354)
+
+[node name="Grass363" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-842, 375)
+
+[node name="Grass364" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-815, 392)
+
+[node name="Grass365" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-808, 349)
+
+[node name="Grass366" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-779, 359)
+
+[node name="Grass367" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-770, 378)
+
+[node name="Grass368" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-754, 402)
+
+[node name="Grass369" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-777, 396)
+
+[node name="Grass370" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-805, 410)
+
+[node name="Grass371" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-520, 488)
+
+[node name="Grass372" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-563, 471)
+
+[node name="Grass373" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-553, 492)
+
+[node name="Grass374" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-526, 509)
+
+[node name="Grass375" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-519, 466)
+
+[node name="Grass376" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-490, 476)
+
+[node name="Grass377" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-481, 495)
+
+[node name="Grass378" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-465, 519)
+
+[node name="Grass379" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-488, 513)
+
+[node name="Grass380" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-516, 527)
+
+[node name="Grass381" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-444, 336)
+
+[node name="Grass382" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-487, 319)
+
+[node name="Grass383" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-477, 340)
+
+[node name="Grass384" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-450, 357)
+
+[node name="Grass385" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-443, 314)
+
+[node name="Grass386" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-414, 324)
+
+[node name="Grass387" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-405, 343)
+
+[node name="Grass388" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-389, 367)
+
+[node name="Grass389" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-412, 361)
+
+[node name="Grass390" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-440, 375)
+
+[node name="Grass391" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-858, 502)
+
+[node name="Grass392" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-901, 485)
+
+[node name="Grass393" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-891, 506)
+
+[node name="Grass394" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-864, 523)
+
+[node name="Grass395" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-857, 480)
+
+[node name="Grass396" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-828, 490)
+
+[node name="Grass397" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-819, 509)
+
+[node name="Grass398" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-803, 533)
+
+[node name="Grass399" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-826, 527)
+
+[node name="Grass400" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-854, 541)
+
+[node name="Grass401" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-681, 272)
+
+[node name="Grass402" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-724, 255)
+
+[node name="Grass403" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-714, 276)
+
+[node name="Grass404" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-687, 293)
+
+[node name="Grass405" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-680, 250)
+
+[node name="Grass406" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-651, 260)
+
+[node name="Grass407" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-642, 279)
+
+[node name="Grass408" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-626, 303)
+
+[node name="Grass409" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-649, 297)
+
+[node name="Grass410" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-677, 311)
+
+[node name="Grass411" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-952, 235)
+
+[node name="Grass412" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-995, 218)
+
+[node name="Grass413" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-985, 239)
+
+[node name="Grass414" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-958, 256)
+
+[node name="Grass415" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-951, 213)
+
+[node name="Grass416" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-922, 223)
+
+[node name="Grass417" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-913, 242)
+
+[node name="Grass418" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-897, 266)
+
+[node name="Grass419" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-920, 260)
+
+[node name="Grass420" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-948, 274)
+
+[node name="Grass421" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-367, 61)
+
+[node name="Grass422" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-410, 44)
+
+[node name="Grass423" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-400, 65)
+
+[node name="Grass424" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-373, 82)
+
+[node name="Grass425" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-366, 39)
+
+[node name="Grass426" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-337, 49)
+
+[node name="Grass427" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-328, 68)
+
+[node name="Grass428" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-312, 92)
+
+[node name="Grass429" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-335, 86)
+
+[node name="Grass430" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-363, 100)
+
+[node name="Grass431" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-62, 293)
+
+[node name="Grass432" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-105, 276)
+
+[node name="Grass433" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-95, 297)
+
+[node name="Grass434" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-68, 314)
+
+[node name="Grass435" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-61, 271)
+
+[node name="Grass436" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-32, 281)
+
+[node name="Grass437" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-23, 300)
+
+[node name="Grass438" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-7, 324)
+
+[node name="Grass439" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-30, 318)
+
+[node name="Grass440" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-58, 332)
+
+[node name="Grass441" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-67, 502)
+
+[node name="Grass442" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-110, 485)
+
+[node name="Grass443" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-100, 506)
+
+[node name="Grass444" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-73, 523)
+
+[node name="Grass445" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-66, 480)
+
+[node name="Grass446" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-37, 490)
+
+[node name="Grass447" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-28, 509)
+
+[node name="Grass448" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-12, 533)
+
+[node name="Grass449" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-35, 527)
+
+[node name="Grass450" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-63, 541)
+
+[node name="Grass451" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-266, 583)
+
+[node name="Grass452" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-309, 566)
+
+[node name="Grass453" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-299, 587)
+
+[node name="Grass454" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-272, 604)
+
+[node name="Grass455" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-265, 561)
+
+[node name="Grass456" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-236, 571)
+
+[node name="Grass457" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-227, 590)
+
+[node name="Grass458" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-211, 614)
+
+[node name="Grass459" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-234, 608)
+
+[node name="Grass460" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-262, 622)
+
+[node name="Grass461" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-901, 97)
+
+[node name="Grass462" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-944, 80)
+
+[node name="Grass463" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-934, 101)
+
+[node name="Grass464" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-907, 118)
+
+[node name="Grass465" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-900, 75)
+
+[node name="Grass466" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-871, 85)
+
+[node name="Grass467" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-862, 104)
+
+[node name="Grass468" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-846, 128)
+
+[node name="Grass469" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-869, 122)
+
+[node name="Grass470" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-897, 136)
+
+[node name="Grass471" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1022, 568)
+
+[node name="Grass472" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1065, 551)
+
+[node name="Grass473" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1055, 572)
+
+[node name="Grass474" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1028, 589)
+
+[node name="Grass475" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1021, 546)
+
+[node name="Grass476" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-992, 556)
+
+[node name="Grass477" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-983, 575)
+
+[node name="Grass478" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-967, 599)
+
+[node name="Grass479" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-990, 593)
+
+[node name="Grass480" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1018, 607)
+
+[node name="Mushroom49" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-927, 574)
+
+[node name="Mushroom50" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-298, 367)
+
+[node name="Mushroom51" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-757, 185)
+
+[node name="Mushroom52" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-1036, 189)
+
+[node name="Mushroom53" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-156, 599)
+
+[node name="Mushroom54" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(44, 385)
+
+[node name="Mushroom55" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-36, 177)
+
+[node name="Mushroom56" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-537, 61)
+
+[node name="Tree66" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-591, 582)
+
+[node name="Tree67" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-991, 424)
+
+[node name="Tree68" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-745, 58)
+
+[node name="Tree69" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-71, 552)
+
+[node name="Tree70" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-366, 367)
+
+[node name="Tree71" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(29, 190)
+
+[node name="Tree72" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-747, 360)
+
+[node name="Rock34" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-800, 594)
+
+[node name="Rock35" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-736, 156)
+
+[node name="Rock36" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-574, 184)
+
+[node name="Rock37" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-126, 85)
+
+[node name="Rock38" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-48, 86)
+
+[node name="Rock39" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-76, 46)
+
+[node name="Rock40" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-278, 430)
+
+[node name="Rock41" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-79, 610)
+
+[node name="Rock42" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-689, 432)
+
+[node name="Rock43" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-921, 177)
+
+[node name="Rock44" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-942, 39)
+
+[node name="Tree73" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1125, 130)
+
+[node name="Tree74" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1778, 509)
+
+[node name="Tree75" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1923, 452)
+
+[node name="Tree76" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(2017, 230)
+
+[node name="Tree77" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1906, 106)
+
+[node name="Tree78" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1295, 196)
+
+[node name="Tree79" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1277, 486)
+
+[node name="Tree80" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1871, 291)
+
+[node name="Tree81" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1563, 326)
+
+[node name="Tree82" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1692, 203)
+
+[node name="Tree83" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1505, 127)
+
+[node name="Mushroom57" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1225, 280)
+
+[node name="Mushroom58" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1334, 484)
+
+[node name="Mushroom59" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1678, 526)
+
+[node name="Mushroom60" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1466, 148)
+
+[node name="Mushroom61" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1772, 158)
+
+[node name="Mushroom62" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1964, 362)
+
+[node name="Grass481" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1321, 354)
+
+[node name="Grass482" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1278, 337)
+
+[node name="Grass483" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1288, 358)
+
+[node name="Grass484" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1315, 375)
+
+[node name="Grass485" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1322, 332)
+
+[node name="Grass486" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1351, 342)
+
+[node name="Grass487" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1360, 361)
+
+[node name="Grass488" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1376, 385)
+
+[node name="Grass489" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1353, 379)
+
+[node name="Grass490" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1325, 393)
+
+[node name="Grass491" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1610, 471)
+
+[node name="Grass492" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1567, 454)
+
+[node name="Grass493" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1577, 475)
+
+[node name="Grass494" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1604, 492)
+
+[node name="Grass495" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1611, 449)
+
+[node name="Grass496" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1640, 459)
+
+[node name="Grass497" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1649, 478)
+
+[node name="Grass498" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1665, 502)
+
+[node name="Grass499" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1642, 496)
+
+[node name="Grass500" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1614, 510)
+
+[node name="Grass501" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1686, 319)
+
+[node name="Grass502" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1643, 302)
+
+[node name="Grass503" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1653, 323)
+
+[node name="Grass504" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1680, 340)
+
+[node name="Grass505" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1687, 297)
+
+[node name="Grass506" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1716, 307)
+
+[node name="Grass507" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1725, 326)
+
+[node name="Grass508" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1741, 350)
+
+[node name="Grass509" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1718, 344)
+
+[node name="Grass510" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1690, 358)
+
+[node name="Grass511" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1272, 485)
+
+[node name="Grass512" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1229, 468)
+
+[node name="Grass513" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1239, 489)
+
+[node name="Grass514" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1266, 506)
+
+[node name="Grass515" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1273, 463)
+
+[node name="Grass516" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1302, 473)
+
+[node name="Grass517" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1311, 492)
+
+[node name="Grass518" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1327, 516)
+
+[node name="Grass519" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1304, 510)
+
+[node name="Grass520" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1276, 524)
+
+[node name="Grass521" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1449, 255)
+
+[node name="Grass522" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1406, 238)
+
+[node name="Grass523" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1416, 259)
+
+[node name="Grass524" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1443, 276)
+
+[node name="Grass525" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1450, 233)
+
+[node name="Grass526" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1479, 243)
+
+[node name="Grass527" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1488, 262)
+
+[node name="Grass528" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1504, 286)
+
+[node name="Grass529" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1481, 280)
+
+[node name="Grass530" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1453, 294)
+
+[node name="Grass531" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1178, 218)
+
+[node name="Grass532" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1135, 201)
+
+[node name="Grass533" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1145, 222)
+
+[node name="Grass534" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1172, 239)
+
+[node name="Grass535" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1179, 196)
+
+[node name="Grass536" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1208, 206)
+
+[node name="Grass537" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1217, 225)
+
+[node name="Grass538" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1233, 249)
+
+[node name="Grass539" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1210, 243)
+
+[node name="Grass540" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1182, 257)
+
+[node name="Grass541" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1763, 44)
+
+[node name="Grass542" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1720, 27)
+
+[node name="Grass543" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1730, 48)
+
+[node name="Grass544" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1757, 65)
+
+[node name="Grass545" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1764, 22)
+
+[node name="Grass546" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1793, 32)
+
+[node name="Grass547" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1802, 51)
+
+[node name="Grass548" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1818, 75)
+
+[node name="Grass549" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1795, 69)
+
+[node name="Grass550" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1767, 83)
+
+[node name="Grass551" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2068, 276)
+
+[node name="Grass552" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2025, 259)
+
+[node name="Grass553" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2035, 280)
+
+[node name="Grass554" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2062, 297)
+
+[node name="Grass555" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2069, 254)
+
+[node name="Grass556" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2098, 264)
+
+[node name="Grass557" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2107, 283)
+
+[node name="Grass558" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2123, 307)
+
+[node name="Grass559" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2100, 301)
+
+[node name="Grass560" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2072, 315)
+
+[node name="Grass561" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2063, 485)
+
+[node name="Grass562" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2020, 468)
+
+[node name="Grass563" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2030, 489)
+
+[node name="Grass564" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2057, 506)
+
+[node name="Grass565" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2064, 463)
+
+[node name="Grass566" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2093, 473)
+
+[node name="Grass567" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2102, 492)
+
+[node name="Grass568" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2118, 516)
+
+[node name="Grass569" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2095, 510)
+
+[node name="Grass570" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2067, 524)
+
+[node name="Grass571" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1864, 566)
+
+[node name="Grass572" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1821, 549)
+
+[node name="Grass573" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1831, 570)
+
+[node name="Grass574" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1858, 587)
+
+[node name="Grass575" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1865, 544)
+
+[node name="Grass576" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1894, 554)
+
+[node name="Grass577" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1903, 573)
+
+[node name="Grass578" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1919, 597)
+
+[node name="Grass579" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1896, 591)
+
+[node name="Grass580" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1868, 605)
+
+[node name="Grass581" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1229, 80)
+
+[node name="Grass582" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1186, 63)
+
+[node name="Grass583" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1196, 84)
+
+[node name="Grass584" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1223, 101)
+
+[node name="Grass585" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1230, 58)
+
+[node name="Grass586" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1259, 68)
+
+[node name="Grass587" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1268, 87)
+
+[node name="Grass588" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1284, 111)
+
+[node name="Grass589" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1261, 105)
+
+[node name="Grass590" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1233, 119)
+
+[node name="Grass591" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1108, 551)
+
+[node name="Grass592" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1065, 534)
+
+[node name="Grass593" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1075, 555)
+
+[node name="Grass594" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1102, 572)
+
+[node name="Grass595" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1109, 529)
+
+[node name="Grass596" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1138, 539)
+
+[node name="Grass597" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1147, 558)
+
+[node name="Grass598" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1163, 582)
+
+[node name="Grass599" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1140, 576)
+
+[node name="Grass600" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1112, 590)
+
+[node name="Mushroom63" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1203, 557)
+
+[node name="Mushroom64" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1832, 350)
+
+[node name="Mushroom65" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1373, 168)
+
+[node name="Mushroom66" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1094, 172)
+
+[node name="Mushroom67" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1974, 582)
+
+[node name="Mushroom68" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(2174, 368)
+
+[node name="Mushroom69" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(2094, 160)
+
+[node name="Mushroom70" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1593, 44)
+
+[node name="Tree84" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1539, 565)
+
+[node name="Tree85" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1139, 407)
+
+[node name="Tree86" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1385, 41)
+
+[node name="Tree87" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(2059, 535)
+
+[node name="Tree88" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1764, 350)
+
+[node name="Tree89" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(2159, 173)
+
+[node name="Tree90" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1383, 343)
+
+[node name="Rock45" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1330, 577)
+
+[node name="Rock46" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1394, 139)
+
+[node name="Rock47" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1556, 167)
+
+[node name="Rock48" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(2004, 68)
+
+[node name="Rock49" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(2082, 69)
+
+[node name="Rock50" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(2054, 29)
+
+[node name="Rock51" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1852, 413)
+
+[node name="Rock52" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(2051, 593)
+
+[node name="Rock53" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1441, 415)
+
+[node name="Rock54" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1209, 160)
+
+[node name="Rock55" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1188, 22)
+
+[node name="Tree91" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1104, -456)
+
+[node name="Tree92" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1757, -77)
+
+[node name="Tree93" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1902, -134)
+
+[node name="Tree94" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1996, -356)
+
+[node name="Tree95" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1885, -480)
+
+[node name="Tree96" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1274, -390)
+
+[node name="Tree97" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1256, -100)
+
+[node name="Tree98" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1850, -295)
+
+[node name="Tree99" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1542, -260)
+
+[node name="Tree100" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1671, -383)
+
+[node name="Tree101" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1484, -459)
+
+[node name="Mushroom71" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1204, -306)
+
+[node name="Mushroom72" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1313, -102)
+
+[node name="Mushroom73" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1657, -60)
+
+[node name="Mushroom74" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1445, -438)
+
+[node name="Mushroom75" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1751, -428)
+
+[node name="Mushroom76" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1943, -224)
+
+[node name="Grass601" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1300, -232)
+
+[node name="Grass602" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1257, -249)
+
+[node name="Grass603" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1267, -228)
+
+[node name="Grass604" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1294, -211)
+
+[node name="Grass605" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1301, -254)
+
+[node name="Grass606" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1330, -244)
+
+[node name="Grass607" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1339, -225)
+
+[node name="Grass608" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1355, -201)
+
+[node name="Grass609" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1332, -207)
+
+[node name="Grass610" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1304, -193)
+
+[node name="Grass611" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1589, -115)
+
+[node name="Grass612" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1546, -132)
+
+[node name="Grass613" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1556, -111)
+
+[node name="Grass614" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1583, -94)
+
+[node name="Grass615" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1590, -137)
+
+[node name="Grass616" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1619, -127)
+
+[node name="Grass617" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1628, -108)
+
+[node name="Grass618" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1644, -84)
+
+[node name="Grass619" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1621, -90)
+
+[node name="Grass620" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1593, -76)
+
+[node name="Grass621" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1665, -267)
+
+[node name="Grass622" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1622, -284)
+
+[node name="Grass623" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1632, -263)
+
+[node name="Grass624" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1659, -246)
+
+[node name="Grass625" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1666, -289)
+
+[node name="Grass626" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1695, -279)
+
+[node name="Grass627" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1704, -260)
+
+[node name="Grass628" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1720, -236)
+
+[node name="Grass629" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1697, -242)
+
+[node name="Grass630" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1669, -228)
+
+[node name="Grass631" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1251, -101)
+
+[node name="Grass632" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1208, -118)
+
+[node name="Grass633" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1218, -97)
+
+[node name="Grass634" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1245, -80)
+
+[node name="Grass635" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1252, -123)
+
+[node name="Grass636" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1281, -113)
+
+[node name="Grass637" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1290, -94)
+
+[node name="Grass638" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1306, -70)
+
+[node name="Grass639" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1283, -76)
+
+[node name="Grass640" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1255, -62)
+
+[node name="Grass641" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1428, -331)
+
+[node name="Grass642" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1385, -348)
+
+[node name="Grass643" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1395, -327)
+
+[node name="Grass644" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1422, -310)
+
+[node name="Grass645" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1429, -353)
+
+[node name="Grass646" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1458, -343)
+
+[node name="Grass647" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1467, -324)
+
+[node name="Grass648" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1483, -300)
+
+[node name="Grass649" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1460, -306)
+
+[node name="Grass650" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1432, -292)
+
+[node name="Grass651" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1157, -368)
+
+[node name="Grass652" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1114, -385)
+
+[node name="Grass653" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1124, -364)
+
+[node name="Grass654" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1151, -347)
+
+[node name="Grass655" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1158, -390)
+
+[node name="Grass656" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1187, -380)
+
+[node name="Grass657" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1196, -361)
+
+[node name="Grass658" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1212, -337)
+
+[node name="Grass659" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1189, -343)
+
+[node name="Grass660" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1161, -329)
+
+[node name="Grass661" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1742, -542)
+
+[node name="Grass662" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1699, -559)
+
+[node name="Grass663" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1709, -538)
+
+[node name="Grass664" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1736, -521)
+
+[node name="Grass665" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1743, -564)
+
+[node name="Grass666" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1772, -554)
+
+[node name="Grass667" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1781, -535)
+
+[node name="Grass668" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1797, -511)
+
+[node name="Grass669" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1774, -517)
+
+[node name="Grass670" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1746, -503)
+
+[node name="Grass671" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2047, -310)
+
+[node name="Grass672" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2004, -327)
+
+[node name="Grass673" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2014, -306)
+
+[node name="Grass674" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2041, -289)
+
+[node name="Grass675" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2048, -332)
+
+[node name="Grass676" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2077, -322)
+
+[node name="Grass677" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2086, -303)
+
+[node name="Grass678" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2102, -279)
+
+[node name="Grass679" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2079, -285)
+
+[node name="Grass680" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2051, -271)
+
+[node name="Grass681" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2042, -101)
+
+[node name="Grass682" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1999, -118)
+
+[node name="Grass683" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2009, -97)
+
+[node name="Grass684" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2036, -80)
+
+[node name="Grass685" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2043, -123)
+
+[node name="Grass686" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2072, -113)
+
+[node name="Grass687" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2081, -94)
+
+[node name="Grass688" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2097, -70)
+
+[node name="Grass689" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2074, -76)
+
+[node name="Grass690" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2046, -62)
+
+[node name="Grass691" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1843, -20)
+
+[node name="Grass692" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1800, -37)
+
+[node name="Grass693" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1810, -16)
+
+[node name="Grass694" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1837, 1)
+
+[node name="Grass695" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1844, -42)
+
+[node name="Grass696" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1873, -32)
+
+[node name="Grass697" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1882, -13)
+
+[node name="Grass698" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1898, 11)
+
+[node name="Grass699" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1875, 5)
+
+[node name="Grass700" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1847, 19)
+
+[node name="Grass701" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1208, -506)
+
+[node name="Grass702" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1165, -523)
+
+[node name="Grass703" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1175, -502)
+
+[node name="Grass704" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1202, -485)
+
+[node name="Grass705" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1209, -528)
+
+[node name="Grass706" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1238, -518)
+
+[node name="Grass707" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1247, -499)
+
+[node name="Grass708" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1263, -475)
+
+[node name="Grass709" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1240, -481)
+
+[node name="Grass710" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1212, -467)
+
+[node name="Grass711" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1087, -35)
+
+[node name="Grass712" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1044, -52)
+
+[node name="Grass713" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1054, -31)
+
+[node name="Grass714" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1081, -14)
+
+[node name="Grass715" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1088, -57)
+
+[node name="Grass716" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1117, -47)
+
+[node name="Grass717" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1126, -28)
+
+[node name="Grass718" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1142, -4)
+
+[node name="Grass719" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1119, -10)
+
+[node name="Grass720" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1091, 4)
+
+[node name="Mushroom77" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1182, -29)
+
+[node name="Mushroom78" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1811, -236)
+
+[node name="Mushroom79" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1352, -418)
+
+[node name="Mushroom80" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1073, -414)
+
+[node name="Mushroom81" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1953, -4)
+
+[node name="Mushroom82" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(2153, -218)
+
+[node name="Mushroom83" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(2073, -426)
+
+[node name="Mushroom84" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1572, -542)
+
+[node name="Tree102" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1518, -21)
+
+[node name="Tree103" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1118, -179)
+
+[node name="Tree104" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1364, -545)
+
+[node name="Tree105" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(2038, -51)
+
+[node name="Tree106" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1743, -236)
+
+[node name="Tree107" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(2138, -413)
+
+[node name="Tree108" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1362, -243)
+
+[node name="Rock56" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1309, -9)
+
+[node name="Rock57" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1373, -447)
+
+[node name="Rock58" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1535, -419)
+
+[node name="Rock59" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1983, -518)
+
+[node name="Rock60" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(2061, -517)
+
+[node name="Rock61" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(2033, -557)
+
+[node name="Rock62" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1831, -173)
+
+[node name="Rock63" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(2030, 7)
+
+[node name="Rock64" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1420, -171)
+
+[node name="Rock65" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1188, -426)
+
+[node name="Rock66" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1167, -564)
+
+[node name="Tree109" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-55, 777)
+
+[node name="Tree110" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(598, 1156)
+
+[node name="Tree111" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(743, 1099)
+
+[node name="Tree112" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(837, 877)
+
+[node name="Tree113" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(726, 753)
+
+[node name="Tree114" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(115, 843)
+
+[node name="Tree115" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(97, 1133)
+
+[node name="Tree116" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(691, 938)
+
+[node name="Tree117" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(383, 973)
+
+[node name="Tree118" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(512, 850)
+
+[node name="Tree119" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(325, 774)
+
+[node name="Mushroom85" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(45, 927)
+
+[node name="Mushroom86" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(154, 1131)
+
+[node name="Mushroom87" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(498, 1173)
+
+[node name="Mushroom88" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(286, 795)
+
+[node name="Mushroom89" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(592, 805)
+
+[node name="Mushroom90" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(784, 1009)
+
+[node name="Grass721" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(141, 1001)
+
+[node name="Grass722" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(98, 984)
+
+[node name="Grass723" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(108, 1005)
+
+[node name="Grass724" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(135, 1022)
+
+[node name="Grass725" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(142, 979)
+
+[node name="Grass726" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(171, 989)
+
+[node name="Grass727" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(180, 1008)
+
+[node name="Grass728" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(196, 1032)
+
+[node name="Grass729" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(173, 1026)
+
+[node name="Grass730" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(145, 1040)
+
+[node name="Grass731" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(430, 1118)
+
+[node name="Grass732" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(387, 1101)
+
+[node name="Grass733" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(397, 1122)
+
+[node name="Grass734" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(424, 1139)
+
+[node name="Grass735" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(431, 1096)
+
+[node name="Grass736" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(460, 1106)
+
+[node name="Grass737" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(469, 1125)
+
+[node name="Grass738" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(485, 1149)
+
+[node name="Grass739" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(462, 1143)
+
+[node name="Grass740" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(434, 1157)
+
+[node name="Grass741" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(506, 966)
+
+[node name="Grass742" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(463, 949)
+
+[node name="Grass743" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(473, 970)
+
+[node name="Grass744" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(500, 987)
+
+[node name="Grass745" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(507, 944)
+
+[node name="Grass746" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(536, 954)
+
+[node name="Grass747" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(545, 973)
+
+[node name="Grass748" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(561, 997)
+
+[node name="Grass749" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(538, 991)
+
+[node name="Grass750" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(510, 1005)
+
+[node name="Grass751" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(92, 1132)
+
+[node name="Grass752" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(49, 1115)
+
+[node name="Grass753" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(59, 1136)
+
+[node name="Grass754" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(86, 1153)
+
+[node name="Grass755" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(93, 1110)
+
+[node name="Grass756" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(122, 1120)
+
+[node name="Grass757" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(131, 1139)
+
+[node name="Grass758" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(147, 1163)
+
+[node name="Grass759" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(124, 1157)
+
+[node name="Grass760" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(96, 1171)
+
+[node name="Grass761" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(269, 902)
+
+[node name="Grass762" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(226, 885)
+
+[node name="Grass763" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(236, 906)
+
+[node name="Grass764" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(263, 923)
+
+[node name="Grass765" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(270, 880)
+
+[node name="Grass766" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(299, 890)
+
+[node name="Grass767" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(308, 909)
+
+[node name="Grass768" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(324, 933)
+
+[node name="Grass769" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(301, 927)
+
+[node name="Grass770" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(273, 941)
+
+[node name="Grass771" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-2, 865)
+
+[node name="Grass772" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-45, 848)
+
+[node name="Grass773" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-35, 869)
+
+[node name="Grass774" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-8, 886)
+
+[node name="Grass775" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1, 843)
+
+[node name="Grass776" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(28, 853)
+
+[node name="Grass777" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(37, 872)
+
+[node name="Grass778" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(53, 896)
+
+[node name="Grass779" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(30, 890)
+
+[node name="Grass780" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2, 904)
+
+[node name="Grass781" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(583, 691)
+
+[node name="Grass782" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(540, 674)
+
+[node name="Grass783" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(550, 695)
+
+[node name="Grass784" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(577, 712)
+
+[node name="Grass785" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(584, 669)
+
+[node name="Grass786" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(613, 679)
+
+[node name="Grass787" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(622, 698)
+
+[node name="Grass788" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(638, 722)
+
+[node name="Grass789" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(615, 716)
+
+[node name="Grass790" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(587, 730)
+
+[node name="Grass791" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(888, 923)
+
+[node name="Grass792" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(845, 906)
+
+[node name="Grass793" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(855, 927)
+
+[node name="Grass794" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(882, 944)
+
+[node name="Grass795" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(889, 901)
+
+[node name="Grass796" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(918, 911)
+
+[node name="Grass797" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(927, 930)
+
+[node name="Grass798" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(943, 954)
+
+[node name="Grass799" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(920, 948)
+
+[node name="Grass800" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(892, 962)
+
+[node name="Grass801" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(883, 1132)
+
+[node name="Grass802" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(840, 1115)
+
+[node name="Grass803" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(850, 1136)
+
+[node name="Grass804" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(877, 1153)
+
+[node name="Grass805" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(884, 1110)
+
+[node name="Grass806" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(913, 1120)
+
+[node name="Grass807" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(922, 1139)
+
+[node name="Grass808" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(938, 1163)
+
+[node name="Grass809" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(915, 1157)
+
+[node name="Grass810" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(887, 1171)
+
+[node name="Grass811" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(684, 1213)
+
+[node name="Grass812" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(641, 1196)
+
+[node name="Grass813" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(651, 1217)
+
+[node name="Grass814" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(678, 1234)
+
+[node name="Grass815" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(685, 1191)
+
+[node name="Grass816" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(714, 1201)
+
+[node name="Grass817" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(723, 1220)
+
+[node name="Grass818" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(739, 1244)
+
+[node name="Grass819" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(716, 1238)
+
+[node name="Grass820" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(688, 1252)
+
+[node name="Grass821" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(49, 727)
+
+[node name="Grass822" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(6, 710)
+
+[node name="Grass823" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(16, 731)
+
+[node name="Grass824" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(43, 748)
+
+[node name="Grass825" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(50, 705)
+
+[node name="Grass826" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(79, 715)
+
+[node name="Grass827" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(88, 734)
+
+[node name="Grass828" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(104, 758)
+
+[node name="Grass829" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(81, 752)
+
+[node name="Grass830" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(53, 766)
+
+[node name="Grass831" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-72, 1198)
+
+[node name="Grass832" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-115, 1181)
+
+[node name="Grass833" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-105, 1202)
+
+[node name="Grass834" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-78, 1219)
+
+[node name="Grass835" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-71, 1176)
+
+[node name="Grass836" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-42, 1186)
+
+[node name="Grass837" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-33, 1205)
+
+[node name="Grass838" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-17, 1229)
+
+[node name="Grass839" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-40, 1223)
+
+[node name="Grass840" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-68, 1237)
+
+[node name="Mushroom91" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(23, 1204)
+
+[node name="Mushroom92" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(652, 997)
+
+[node name="Mushroom93" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(193, 815)
+
+[node name="Mushroom94" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-86, 819)
+
+[node name="Mushroom95" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(794, 1229)
+
+[node name="Mushroom96" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(994, 1015)
+
+[node name="Mushroom97" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(914, 807)
+
+[node name="Mushroom98" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(413, 691)
+
+[node name="Tree120" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(359, 1212)
+
+[node name="Tree121" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-41, 1054)
+
+[node name="Tree122" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(205, 688)
+
+[node name="Tree123" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(879, 1182)
+
+[node name="Tree124" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(584, 997)
+
+[node name="Tree125" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(979, 820)
+
+[node name="Tree126" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(203, 990)
+
+[node name="Rock67" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(150, 1224)
+
+[node name="Rock68" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(214, 786)
+
+[node name="Rock69" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(376, 814)
+
+[node name="Rock70" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(824, 715)
+
+[node name="Rock71" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(902, 716)
+
+[node name="Rock72" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(874, 676)
+
+[node name="Rock73" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(672, 1060)
+
+[node name="Rock74" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(871, 1240)
+
+[node name="Rock75" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(261, 1062)
+
+[node name="Rock76" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(29, 807)
+
+[node name="Rock77" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(8, 669)
+
+[node name="Tree127" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1063, 755)
+
+[node name="Tree128" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1716, 1134)
+
+[node name="Tree129" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1861, 1077)
+
+[node name="Tree130" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1955, 855)
+
+[node name="Tree131" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1844, 731)
+
+[node name="Tree132" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1233, 821)
+
+[node name="Tree133" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1215, 1111)
+
+[node name="Tree134" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1809, 916)
+
+[node name="Tree135" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1501, 951)
+
+[node name="Tree136" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1630, 828)
+
+[node name="Tree137" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(1443, 752)
+
+[node name="Mushroom99" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1163, 905)
+
+[node name="Mushroom100" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1272, 1109)
+
+[node name="Mushroom101" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1616, 1151)
+
+[node name="Mushroom102" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1404, 773)
+
+[node name="Mushroom103" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1710, 783)
+
+[node name="Mushroom104" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(1902, 987)
+
+[node name="Grass841" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1259, 979)
+
+[node name="Grass842" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1216, 962)
+
+[node name="Grass843" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1226, 983)
+
+[node name="Grass844" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1253, 1000)
+
+[node name="Grass845" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1260, 957)
+
+[node name="Grass846" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1289, 967)
+
+[node name="Grass847" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1298, 986)
+
+[node name="Grass848" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1314, 1010)
+
+[node name="Grass849" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1291, 1004)
+
+[node name="Grass850" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1263, 1018)
+
+[node name="Grass851" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1548, 1096)
+
+[node name="Grass852" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1505, 1079)
+
+[node name="Grass853" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1515, 1100)
+
+[node name="Grass854" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1542, 1117)
+
+[node name="Grass855" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1549, 1074)
+
+[node name="Grass856" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1578, 1084)
+
+[node name="Grass857" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1587, 1103)
+
+[node name="Grass858" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1603, 1127)
+
+[node name="Grass859" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1580, 1121)
+
+[node name="Grass860" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1552, 1135)
+
+[node name="Grass861" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1624, 944)
+
+[node name="Grass862" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1581, 927)
+
+[node name="Grass863" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1591, 948)
+
+[node name="Grass864" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1618, 965)
+
+[node name="Grass865" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1625, 922)
+
+[node name="Grass866" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1654, 932)
+
+[node name="Grass867" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1663, 951)
+
+[node name="Grass868" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1679, 975)
+
+[node name="Grass869" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1656, 969)
+
+[node name="Grass870" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1628, 983)
+
+[node name="Grass871" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1210, 1110)
+
+[node name="Grass872" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1167, 1093)
+
+[node name="Grass873" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1177, 1114)
+
+[node name="Grass874" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1204, 1131)
+
+[node name="Grass875" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1211, 1088)
+
+[node name="Grass876" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1240, 1098)
+
+[node name="Grass877" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1249, 1117)
+
+[node name="Grass878" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1265, 1141)
+
+[node name="Grass879" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1242, 1135)
+
+[node name="Grass880" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1214, 1149)
+
+[node name="Grass881" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1387, 880)
+
+[node name="Grass882" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1344, 863)
+
+[node name="Grass883" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1354, 884)
+
+[node name="Grass884" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1381, 901)
+
+[node name="Grass885" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1388, 858)
+
+[node name="Grass886" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1417, 868)
+
+[node name="Grass887" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1426, 887)
+
+[node name="Grass888" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1442, 911)
+
+[node name="Grass889" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1419, 905)
+
+[node name="Grass890" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1391, 919)
+
+[node name="Grass891" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1116, 843)
+
+[node name="Grass892" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1073, 826)
+
+[node name="Grass893" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1083, 847)
+
+[node name="Grass894" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1110, 864)
+
+[node name="Grass895" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1117, 821)
+
+[node name="Grass896" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1146, 831)
+
+[node name="Grass897" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1155, 850)
+
+[node name="Grass898" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1171, 874)
+
+[node name="Grass899" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1148, 868)
+
+[node name="Grass900" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1120, 882)
+
+[node name="Grass901" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1701, 669)
+
+[node name="Grass902" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1658, 652)
+
+[node name="Grass903" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1668, 673)
+
+[node name="Grass904" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1695, 690)
+
+[node name="Grass905" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1702, 647)
+
+[node name="Grass906" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1731, 657)
+
+[node name="Grass907" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1740, 676)
+
+[node name="Grass908" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1756, 700)
+
+[node name="Grass909" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1733, 694)
+
+[node name="Grass910" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1705, 708)
+
+[node name="Grass911" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2006, 901)
+
+[node name="Grass912" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1963, 884)
+
+[node name="Grass913" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1973, 905)
+
+[node name="Grass914" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2000, 922)
+
+[node name="Grass915" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2007, 879)
+
+[node name="Grass916" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2036, 889)
+
+[node name="Grass917" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2045, 908)
+
+[node name="Grass918" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2061, 932)
+
+[node name="Grass919" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2038, 926)
+
+[node name="Grass920" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2010, 940)
+
+[node name="Grass921" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2001, 1110)
+
+[node name="Grass922" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1958, 1093)
+
+[node name="Grass923" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1968, 1114)
+
+[node name="Grass924" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1995, 1131)
+
+[node name="Grass925" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2002, 1088)
+
+[node name="Grass926" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2031, 1098)
+
+[node name="Grass927" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2040, 1117)
+
+[node name="Grass928" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2056, 1141)
+
+[node name="Grass929" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2033, 1135)
+
+[node name="Grass930" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(2005, 1149)
+
+[node name="Grass931" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1802, 1191)
+
+[node name="Grass932" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1759, 1174)
+
+[node name="Grass933" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1769, 1195)
+
+[node name="Grass934" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1796, 1212)
+
+[node name="Grass935" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1803, 1169)
+
+[node name="Grass936" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1832, 1179)
+
+[node name="Grass937" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1841, 1198)
+
+[node name="Grass938" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1857, 1222)
+
+[node name="Grass939" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1834, 1216)
+
+[node name="Grass940" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1806, 1230)
+
+[node name="Grass941" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1167, 705)
+
+[node name="Grass942" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1124, 688)
+
+[node name="Grass943" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1134, 709)
+
+[node name="Grass944" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1161, 726)
+
+[node name="Grass945" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1168, 683)
+
+[node name="Grass946" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1197, 693)
+
+[node name="Grass947" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1206, 712)
+
+[node name="Grass948" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1222, 736)
+
+[node name="Grass949" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1199, 730)
+
+[node name="Grass950" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1171, 744)
+
+[node name="Grass951" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1046, 1176)
+
+[node name="Grass952" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1003, 1159)
+
+[node name="Grass953" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1013, 1180)
+
+[node name="Grass954" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1040, 1197)
+
+[node name="Grass955" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1047, 1154)
+
+[node name="Grass956" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1076, 1164)
+
+[node name="Grass957" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1085, 1183)
+
+[node name="Grass958" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1101, 1207)
+
+[node name="Grass959" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1078, 1201)
+
+[node name="Grass960" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(1050, 1215)
+
+[node name="Mushroom105" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1141, 1182)
+
+[node name="Mushroom106" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1770, 975)
+
+[node name="Mushroom107" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1311, 793)
+
+[node name="Mushroom108" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1032, 797)
+
+[node name="Mushroom109" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1912, 1207)
+
+[node name="Mushroom110" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(2112, 993)
+
+[node name="Mushroom111" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(2032, 785)
+
+[node name="Mushroom112" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(1531, 669)
+
+[node name="Tree138" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1477, 1190)
+
+[node name="Tree139" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1077, 1032)
+
+[node name="Tree140" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1323, 666)
+
+[node name="Tree141" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1997, 1160)
+
+[node name="Tree142" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1702, 975)
+
+[node name="Tree143" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(2097, 798)
+
+[node name="Tree144" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(1321, 968)
+
+[node name="Rock78" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1268, 1202)
+
+[node name="Rock79" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1332, 764)
+
+[node name="Rock80" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1494, 792)
+
+[node name="Rock81" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1942, 693)
+
+[node name="Rock82" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(2020, 694)
+
+[node name="Rock83" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1992, 654)
+
+[node name="Rock84" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1790, 1038)
+
+[node name="Rock85" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1989, 1218)
+
+[node name="Rock86" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1379, 1040)
+
+[node name="Rock87" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1147, 785)
+
+[node name="Rock88" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(1126, 647)
+
+[node name="Tree145" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-1109, 777)
+
+[node name="Tree146" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-456, 1156)
+
+[node name="Tree147" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-311, 1099)
+
+[node name="Tree148" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-217, 877)
+
+[node name="Tree149" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-328, 753)
+
+[node name="Tree150" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-939, 843)
+
+[node name="Tree151" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-957, 1133)
+
+[node name="Tree152" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-363, 938)
+
+[node name="Tree153" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-671, 973)
+
+[node name="Tree154" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-542, 850)
+
+[node name="Tree155" parent="World" instance=ExtResource("5_8ljpg")]
+position = Vector2(-729, 774)
+
+[node name="Mushroom113" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-1009, 927)
+
+[node name="Mushroom114" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-900, 1131)
+
+[node name="Mushroom115" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-556, 1173)
+
+[node name="Mushroom116" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-768, 795)
+
+[node name="Mushroom117" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-462, 805)
+
+[node name="Mushroom118" parent="World" instance=ExtResource("5_wihky")]
+position = Vector2(-270, 1009)
+
+[node name="Grass961" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-913, 1001)
+
+[node name="Grass962" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-956, 984)
+
+[node name="Grass963" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-946, 1005)
+
+[node name="Grass964" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-919, 1022)
+
+[node name="Grass965" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-912, 979)
+
+[node name="Grass966" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-883, 989)
+
+[node name="Grass967" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-874, 1008)
+
+[node name="Grass968" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-858, 1032)
+
+[node name="Grass969" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-881, 1026)
+
+[node name="Grass970" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-909, 1040)
+
+[node name="Grass971" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-624, 1118)
+
+[node name="Grass972" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-667, 1101)
+
+[node name="Grass973" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-657, 1122)
+
+[node name="Grass974" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-630, 1139)
+
+[node name="Grass975" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-623, 1096)
+
+[node name="Grass976" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-594, 1106)
+
+[node name="Grass977" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-585, 1125)
+
+[node name="Grass978" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-569, 1149)
+
+[node name="Grass979" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-592, 1143)
+
+[node name="Grass980" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-620, 1157)
+
+[node name="Grass981" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-548, 966)
+
+[node name="Grass982" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-591, 949)
+
+[node name="Grass983" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-581, 970)
+
+[node name="Grass984" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-554, 987)
+
+[node name="Grass985" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-547, 944)
+
+[node name="Grass986" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-518, 954)
+
+[node name="Grass987" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-509, 973)
+
+[node name="Grass988" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-493, 997)
+
+[node name="Grass989" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-516, 991)
+
+[node name="Grass990" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-544, 1005)
+
+[node name="Grass991" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-962, 1132)
+
+[node name="Grass992" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1005, 1115)
+
+[node name="Grass993" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-995, 1136)
+
+[node name="Grass994" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-968, 1153)
+
+[node name="Grass995" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-961, 1110)
+
+[node name="Grass996" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-932, 1120)
+
+[node name="Grass997" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-923, 1139)
+
+[node name="Grass998" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-907, 1163)
+
+[node name="Grass999" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-930, 1157)
+
+[node name="Grass1000" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-958, 1171)
+
+[node name="Grass1001" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-785, 902)
+
+[node name="Grass1002" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-828, 885)
+
+[node name="Grass1003" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-818, 906)
+
+[node name="Grass1004" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-791, 923)
+
+[node name="Grass1005" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-784, 880)
+
+[node name="Grass1006" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-755, 890)
+
+[node name="Grass1007" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-746, 909)
+
+[node name="Grass1008" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-730, 933)
+
+[node name="Grass1009" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-753, 927)
+
+[node name="Grass1010" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-781, 941)
+
+[node name="Grass1011" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1056, 865)
+
+[node name="Grass1012" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1099, 848)
+
+[node name="Grass1013" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1089, 869)
+
+[node name="Grass1014" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1062, 886)
+
+[node name="Grass1015" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1055, 843)
+
+[node name="Grass1016" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1026, 853)
+
+[node name="Grass1017" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1017, 872)
+
+[node name="Grass1018" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1001, 896)
+
+[node name="Grass1019" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1024, 890)
+
+[node name="Grass1020" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1052, 904)
+
+[node name="Grass1021" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-471, 691)
+
+[node name="Grass1022" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-514, 674)
+
+[node name="Grass1023" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-504, 695)
+
+[node name="Grass1024" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-477, 712)
+
+[node name="Grass1025" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-470, 669)
+
+[node name="Grass1026" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-441, 679)
+
+[node name="Grass1027" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-432, 698)
+
+[node name="Grass1028" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-416, 722)
+
+[node name="Grass1029" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-439, 716)
+
+[node name="Grass1030" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-467, 730)
+
+[node name="Grass1031" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-166, 923)
+
+[node name="Grass1032" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-209, 906)
+
+[node name="Grass1033" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-199, 927)
+
+[node name="Grass1034" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-172, 944)
+
+[node name="Grass1035" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-165, 901)
+
+[node name="Grass1036" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-136, 911)
+
+[node name="Grass1037" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-127, 930)
+
+[node name="Grass1038" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-111, 954)
+
+[node name="Grass1039" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-134, 948)
+
+[node name="Grass1040" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-162, 962)
+
+[node name="Grass1041" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-171, 1132)
+
+[node name="Grass1042" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-214, 1115)
+
+[node name="Grass1043" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-204, 1136)
+
+[node name="Grass1044" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-177, 1153)
+
+[node name="Grass1045" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-170, 1110)
+
+[node name="Grass1046" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-141, 1120)
+
+[node name="Grass1047" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-132, 1139)
+
+[node name="Grass1048" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-116, 1163)
+
+[node name="Grass1049" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-139, 1157)
+
+[node name="Grass1050" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-167, 1171)
+
+[node name="Grass1051" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-370, 1213)
+
+[node name="Grass1052" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-413, 1196)
+
+[node name="Grass1053" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-403, 1217)
+
+[node name="Grass1054" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-376, 1234)
+
+[node name="Grass1055" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-369, 1191)
+
+[node name="Grass1056" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-340, 1201)
+
+[node name="Grass1057" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-331, 1220)
+
+[node name="Grass1058" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-315, 1244)
+
+[node name="Grass1059" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-338, 1238)
+
+[node name="Grass1060" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-366, 1252)
+
+[node name="Grass1061" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1005, 727)
+
+[node name="Grass1062" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1048, 710)
+
+[node name="Grass1063" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1038, 731)
+
+[node name="Grass1064" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1011, 748)
+
+[node name="Grass1065" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1004, 705)
+
+[node name="Grass1066" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-975, 715)
+
+[node name="Grass1067" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-966, 734)
+
+[node name="Grass1068" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-950, 758)
+
+[node name="Grass1069" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-973, 752)
+
+[node name="Grass1070" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1001, 766)
+
+[node name="Grass1071" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1126, 1198)
+
+[node name="Grass1072" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1169, 1181)
+
+[node name="Grass1073" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1159, 1202)
+
+[node name="Grass1074" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1132, 1219)
+
+[node name="Grass1075" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1125, 1176)
+
+[node name="Grass1076" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1096, 1186)
+
+[node name="Grass1077" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1087, 1205)
+
+[node name="Grass1078" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1071, 1229)
+
+[node name="Grass1079" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1094, 1223)
+
+[node name="Grass1080" parent="World" instance=ExtResource("7_nlokt")]
+position = Vector2(-1122, 1237)
+
+[node name="Mushroom119" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-1031, 1204)
+
+[node name="Mushroom120" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-402, 997)
+
+[node name="Mushroom121" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-861, 815)
+
+[node name="Mushroom122" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-1140, 819)
+
+[node name="Mushroom123" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-260, 1229)
+
+[node name="Mushroom124" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-60, 1015)
+
+[node name="Mushroom125" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-140, 807)
+
+[node name="Mushroom126" parent="World" instance=ExtResource("8_s8ql3")]
+position = Vector2(-641, 691)
+
+[node name="Tree156" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-695, 1212)
+
+[node name="Tree157" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-1095, 1054)
+
+[node name="Tree158" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-849, 688)
+
+[node name="Tree159" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-175, 1182)
+
+[node name="Tree160" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-470, 997)
+
+[node name="Tree161" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-75, 820)
+
+[node name="Tree162" parent="World" instance=ExtResource("7_8d4s2")]
+position = Vector2(-851, 990)
+
+[node name="Rock89" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-904, 1224)
+
+[node name="Rock90" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-840, 786)
+
+[node name="Rock91" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-678, 814)
+
+[node name="Rock92" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-230, 715)
+
+[node name="Rock93" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-152, 716)
+
+[node name="Rock94" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-180, 676)
+
+[node name="Rock95" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-382, 1060)
+
+[node name="Rock96" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-183, 1240)
+
+[node name="Rock97" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-793, 1062)
+
+[node name="Rock98" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-1025, 807)
+
+[node name="Rock99" parent="World" instance=ExtResource("10_fq4va")]
+position = Vector2(-1046, 669)
